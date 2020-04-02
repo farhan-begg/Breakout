@@ -21,9 +21,9 @@ let score = 0;
 let lives = 3;
 
 const bricks = [];
-for (let c = 0; c < brickColumnCount; c++) {
+for (let c = 0; c < brickColumnCount; c += 1) {
   bricks[c] = [];
-  for (let r = 0; r < brickRowCount; r++) {
+  for (let r = 0; r < brickRowCount; r += 1) {
     bricks[c][r] = { x: 0, y: 0, status: 1 };
   }
 }
@@ -55,14 +55,14 @@ function mouseMoveHandler(e) {
   }
 }
 function collisionDetection() {
-  for (let c = 0; c < brickColumnCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
+  for (let c = 0; c < brickColumnCount; c += 1) {
+    for (let r = 0; r < brickRowCount; r += 1) {
       const b = bricks[c][r];
       if (b.status === 1) {
         if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
           dy = -dy;
           b.status = 0;
-          score++;
+          score += 1;
           if (score === brickRowCount * brickColumnCount) {
             alert('YOU WIN, CONGRATS!');
             document.location.reload();
@@ -88,8 +88,8 @@ function drawPaddle() {
   ctx.closePath();
 }
 function drawBricks() {
-  for (let c = 0; c < brickColumnCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
+  for (let c = 0; c < brickColumnCount; c += 1) {
+    for (let r = 0; r < brickRowCount; r += 1) {
       if (bricks[c][r].status === 1) {
         const brickX = (r * (brickWidth + brickPadding)) + brickOffsetLeft;
         const brickY = (c * (brickHeight + brickPadding)) + brickOffsetTop;
@@ -133,7 +133,7 @@ function draw() {
     if (x > paddleX && x < paddleX + paddleWidth) {
       dy = -dy;
     } else {
-      lives--;
+      lives -= 1;
       if (!lives) {
         alert('GAME OVER');
         document.location.reload();
