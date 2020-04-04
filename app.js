@@ -5,6 +5,7 @@ let x = canvas.width / 2;
 let y = canvas.height - 30;
 let dx = 2;
 let dy = -2;
+
 const paddleHeight = 10;
 const paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
@@ -72,7 +73,7 @@ function collisionDetection() {
     }
   }
 }
-
+// Ball
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
@@ -80,6 +81,7 @@ function drawBall() {
   ctx.fill();
   ctx.closePath();
 }
+// Paddle
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -87,6 +89,7 @@ function drawPaddle() {
   ctx.fill();
   ctx.closePath();
 }
+// Bricks 
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c += 1) {
     for (let r = 0; r < brickRowCount; r += 1) {
