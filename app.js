@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-alert */
 // *****************************************************
 // DOM reference
@@ -25,18 +26,46 @@ const brickOffsetLeft = 30;
 const ballRadius = 10;
 const paddleHeight = 10;
 const paddleWidth = 75;
-const ball = {
-  x: canvas.width / 2,
-  y: canvas.height - 30,
-  dx: 2,
-  dy: -2,
-};
+
+
+class Ball {
+  constructor(x = 0, y = 0, dx = 2, dy = -2, radius = 10) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+  }
+  move() {
+    this.x += this.dx;
+    this.y += this.dy;
+    console.log(this.x, this.y, this.dx, this.dy)
+
+  }
+
+  // Ball
+  render(ctx) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, PI2);
+    ctx.fillStyle = objectColor;
+    ctx.fill();
+    ctx.closePath();
+  }
+}
+
+
+const ball = new Ball(0, 0, 2, -2, ballRadius);
+
+
+const paddleXstart = (canvas.width - paddleWidth) / 2;
+const PI2 = Math.PI * 2;
+const objectColor = '#0095DD';
 
 // -----------------------------------------------------
 // Variables
 // -----------------------------------------------------
 
-let paddleX = (canvas.width - paddleWidth) / 2;
+let paddleX = paddleXstart;
 let rightPressed = false;
 let leftPressed = false;
 let score = 0;
@@ -83,19 +112,12 @@ function collisionDetection() {
   }
 }
 
-// Ball
-function drawBall() {
-  ctx.beginPath();
-  ctx.arc(ball.x, ball.y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = '#0095DD';
-  ctx.fill();
-  ctx.closePath();
-}
+
 // Paddle
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = objectColor;
   ctx.fill();
   ctx.closePath();
 }
@@ -110,7 +132,7 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = objectColor;
         ctx.fill();
         ctx.closePath();
       }
@@ -120,7 +142,7 @@ function drawBricks() {
 
 function drawScore() {
   ctx.font = '16px Arial';
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = objectColor;
   ctx.fillText(`Score: ${score}`, 8, 20);
 }
 
@@ -130,6 +152,15 @@ function drawLives() {
   ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
 }
 
+function resetBallAndPaddle() {
+  ball.x = canvas.width / 2;
+  ball.y = canvas.height - 30;
+  ball.dx = 2;
+  ball.dy = -2;
+  paddleX = paddleXstart;
+}
+
+
 
 // -------------------------------------------------------
 // Game Loop
@@ -138,21 +169,22 @@ function drawLives() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
-  drawBall();
   drawPaddle();
   drawScore();
   drawLives();
   collisionDetection();
+  ball.move();
+  ball.render(ctx);
 
 
   // Bounce the ball of the left and the right of the canvas
-  if (ball.x + ball.dx > canvas.width - ballRadius || ball.x + ball.dx < ballRadius) {
+  if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
     ball.dx = -ball.dx;
   }
   // Bounce the ball off the top, paddle, or hit the bottom of the canvas
-  if (ball.y + ball.dy < ballRadius) {
+  if (ball.y + ball.dy < ball.radius) {
     ball.dy = -ball.dy;
-  } else if (ball.y + ball.dy > canvas.height - ballRadius) {
+  } else if (ball.y + ball.dy > canvas.height - ball.radius) {
     if (ball.x > paddleX && ball.x < paddleX + paddleWidth) {
       ball.dy = -ball.dy;
     } else {
@@ -161,11 +193,7 @@ function draw() {
         alert('GAME OVER');
         document.location.reload();
       } else {
-        ball.x = canvas.width / 2;
-        ball.y = canvas.height - 30;
-        ball.dx = 3;
-        ball.dy = -3;
-        paddleX = (canvas.width - paddleWidth) / 2;
+        resetBallAndPaddle();
       }
     }
   }
@@ -175,9 +203,6 @@ function draw() {
   } else if (leftPressed && paddleX > 0) {
     paddleX -= 7;
   }
-
-  ball.x += ball.dx;
-  ball.y += ball.dy;
 
   // Draw the Screen Again
   requestAnimationFrame(draw);
