@@ -1,25 +1,29 @@
 {
-  "name": "breakout",
+  "name": "breakout_js",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Simple 2D Breakout game Tutorial: https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript",
+  "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "webpack --mode development --watch",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/farhan-begg/Breakout.git"
+    "url": "git+https://github.com/aucoeur/breakout_js.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/farhan-begg/Breakout/issues"
+    "url": "https://github.com/aucoeur/breakout_js/issues"
   },
-  "homepage": "https://github.com/farhan-begg/Breakout#readme",
+  "homepage": "https://github.com/aucoeur/breakout_js#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
