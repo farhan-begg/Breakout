@@ -35,7 +35,7 @@ const lives = new Lives(0, livesPosition, 3, black);
 let rightPressed = false;
 let leftPressed = false;
 
-// Setup Bricks Array
+
 const bricks = new Bricks(brickColumnCount, brickRowCount);
 
 function collisionDetection() {
@@ -114,9 +114,9 @@ resetBallAndPaddle();
 
 // Game Loop
 function draw() {
-  // Clear the canvas
+
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  // Call helper functions
+
   ball.render(ctx);
   paddle.render(ctx);
   score.render(ctx);
@@ -127,7 +127,7 @@ function draw() {
   movePaddle();
   collisionsWithCanvasAndPaddle();
 
-  // Draw the screen again
+
   requestAnimationFrame(draw);
 }
 
