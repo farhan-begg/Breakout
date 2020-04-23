@@ -114,7 +114,6 @@ resetBallAndPaddle();
 
 // Game Loop
 function draw() {
-
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
   ball.render(ctx);

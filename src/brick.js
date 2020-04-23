@@ -9,14 +9,4 @@ class Brick extends Sprite {
   }
 }
 
-// class Brick extends Sprite {
-//   constructor(x, y, width = 75, height = 20, color) {
-//     super(x, y);
-//     this.width = width;
-//     this.height = height;
-//     this.status = 1;
-//     this.color = color;
-//   }
-
-
 export default Brick;

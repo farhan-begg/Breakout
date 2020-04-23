@@ -1,4 +1,3 @@
-
 import Paddle from './paddle';
 import Ball from './ball';
 import Score from './score';

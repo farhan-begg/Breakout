@@ -15,7 +15,7 @@ class Lives extends Sprite {
   render(ctx) {
     ctx.font = this.font;
     ctx.fillStyle = this.color;
-    ctx.fillText(`Lives: ${this.lives}`, this.y, 20);
+    ctx.fillText(`Lives: ${this.lives}`, this.y, 3);
   }
 }
 
