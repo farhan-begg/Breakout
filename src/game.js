@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 class Game {
     constructor(canvas, ball, paddle, liveBoard, scoreBoard, brickBuilder) {
         this.canvas = canvas;
@@ -51,7 +52,7 @@ class Game {
             this.ball.dy = -this.ball.dy;
         } else if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
             if (this.ball.x > this.paddle.x && this.ball.x < this.paddle.x + this.paddle.width) {
-                this.ball.y = -this.ball.dy;
+                this.ball.dy = -this.ball.dy;
             } else {
                 this.liveBoard.lives -= 1;
                 if (!this.liveBoard.lives) {
@@ -82,15 +83,9 @@ class Game {
         this.ball.x += this.ball.dx;
         this.ball.y += this.ball.dy;
 
-        // console.log("self: ", self);
-        // requestAnimationFrame(() => {
-        //   // arrow don't bind this
-        //
-        //   this.draw(ctx);
-        // });
+
         const self = this;
         requestAnimationFrame(() => {
-            // console.log("self: ", self);
             self.draw(ctx);
         });
     }
